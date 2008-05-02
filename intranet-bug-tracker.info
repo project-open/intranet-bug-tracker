@@ -18,6 +18,7 @@
         <provides url="intranet-bug-tracker" version="3.2.8.0.0"/>
         <requires url="intranet-core" version="3.2"/>
         <requires url="bug-tracker" version="1.3a9"/>
+        <requires url="workflow" version="2"/>
 
         <callbacks>
         </callbacks>
