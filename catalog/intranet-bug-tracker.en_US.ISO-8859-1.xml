@@ -5,4 +5,8 @@
   <msg key="BT_Product">BT Product</msg>
   <msg key="BT_Version">BT Version</msg>
   <msg key="Bug_Tracker">Bug Tracker</msg>
+  <msg key="Bug_Tracker_Component">Bug Tracker Component</msg>
+  <msg key="Create_a_New_Issue">New Ticket</msg>
+  <msg key="New_Issue">New Ticket</msg>
+  <msg key="Project">Project</msg>
 </message_catalog>
