@@ -39,7 +39,7 @@ ad_library {
 ad_proc -public im_package_bug_tracker_id {} {
     Returns the package id of the intranet-bug-tracker module
 } {
-    return [util_memoize "im_package_bug_tracker_id_helper"]
+    return [util_memoize im_package_bug_tracker_id_helper]
 }
 
 ad_proc -private im_package_bug_tracker_id_helper {} {
