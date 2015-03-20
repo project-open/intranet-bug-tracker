@@ -59,14 +59,14 @@ begin
 	insert into im_category_hierarchy values (
 		(select category_id 
 		from im_categories 
-		where category = ''Consulting Project''),
+		where category = ''Gantt Project''),
 		4300
 	);
 
 	insert into im_category_hierarchy values (
 		(select category_id 
 		from im_categories 
-		where category = ''Consulting Project''),
+		where category = ''Gantt Project''),
 		4305
 	);
 
