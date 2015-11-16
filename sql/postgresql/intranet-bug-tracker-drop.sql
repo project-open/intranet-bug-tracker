@@ -8,11 +8,37 @@
 -- @author frank.bergmann@project-open.com
 
 
-alter table im_timesheet_tasks drop column bt_bug_id;
-
-
 select im_menu__del_module('intranet-bug-tracker');
 select im_component_plugin__del_module('intranet-bug-tracker');
+
+
+-- Delete im_timesheet_tasks.bt_bug_id.
+-- In order to delete the attribute, we need to 
+-- recreate dependent views:
+--
+drop view im_timesheet_tasks_view;
+
+alter table im_timesheet_tasks drop column bt_bug_id;
+
+create or replace view im_timesheet_tasks_view as
+select  t.*,
+        p.parent_id as project_id,
+        p.project_name as task_name,
+        p.project_nr as task_nr,
+        p.percent_completed,
+        p.project_type_id as task_type_id,
+        p.project_status_id as task_status_id,
+        p.start_date,
+        p.end_date,
+        p.reported_hours_cache,
+        p.reported_days_cache,
+        p.reported_hours_cache as reported_units_cache
+from
+        im_projects p,
+        im_timesheet_tasks t
+where
+        t.task_id = p.project_id;
+
 
 -- Remove BT Container Project Types
 -- Set project_type to "Other" from "Bug Tracker Container"
