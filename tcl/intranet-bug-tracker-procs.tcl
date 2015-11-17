@@ -88,7 +88,7 @@ ad_proc -public im_bt_project_options {
 } {
     Get a list of "BT Container Projects" for the current user.
 } {
-    set user_id [ad_get_user_id]
+    set user_id [ad_conn user_id]
     set options [db_list_of_lists project_options "
 	select
 		case when pp.project_name is null then
@@ -258,7 +258,7 @@ ad_proc -public im_navbar_tree_bug_tracker { } {
     system's main NavBar.
 } {
     set wiki [im_navbar_doc_wiki]
-    set current_user_id [ad_get_user_id]
+    set current_user_id [ad_conn user_id]
     set package_id [ad_conn package_id]
     set add_bugs_p [permission::permission_p -party_id $current_user_id -object_id $package_id -privilege "create"]
 
