@@ -172,7 +172,7 @@ ad_proc -public im_bug_tracker_container_component {
 
     set html "
 	<form action=\"$action_url\" method=GET>
-	[export_form_vars return_url]
+	[export_vars -form {return_url}]
 	<table cellspacing=1 cellpadding=1>
 	<tr class=rowtitle>
 	  <td class=rowtitle colspan=2>
