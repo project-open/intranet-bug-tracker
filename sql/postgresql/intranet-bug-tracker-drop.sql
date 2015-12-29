@@ -12,14 +12,29 @@ select im_menu__del_module('intranet-bug-tracker');
 select im_component_plugin__del_module('intranet-bug-tracker');
 
 
+create or replace function inline_0 ()
+returns integer as $body$
+DECLARE
+	v_count		integer;
+BEGIN
+	select count(*) into v_count from user_tab_columns
+	where lower(table_name) = 'im_timesheet_tasks' and lower(column_name) = 'bt_bug_id';
+	IF v_count > 0 THEN
+		alter table im_timesheet_tasks drop column bt_bug_id;
+	END IF;
+
+	RETURN 0;
+END;$body$ language 'plpgsql';
+SELECT inline_0 ();
+DROP FUNCTION inline_0 ();
+
+
+
 -- Delete im_timesheet_tasks.bt_bug_id.
 -- In order to delete the attribute, we need to 
 -- recreate dependent views:
 --
 drop view im_timesheet_tasks_view;
-
-alter table im_timesheet_tasks drop column bt_bug_id;
-
 create or replace view im_timesheet_tasks_view as
 select  t.*,
         p.parent_id as project_id,
@@ -88,8 +103,41 @@ select im_dynfield_widget__delete (
 );
 
 
-alter table im_projects drop column bt_project_id;
-alter table im_projects drop column bt_component_id;
-alter table im_projects drop column bt_found_in_version_id;
-alter table im_projects drop column bt_fix_for_version_id;
+
+
+
+create or replace function inline_0 ()
+returns integer as $body$
+DECLARE
+	v_count		integer;
+BEGIN
+	select count(*) into v_count from user_tab_columns
+	where lower(table_name) = 'im_projects' and lower(column_name) = 'bt_project_id';
+	IF v_count > 0 THEN
+		alter table im_timesheet_tasks drop column bt_project_id;
+	END IF;
+
+	select count(*) into v_count from user_tab_columns
+	where lower(table_name) = 'im_projects' and lower(column_name) = 'bt_component_id';
+	IF v_count > 0 THEN
+		alter table im_timesheet_tasks drop column bt_component_id;
+	END IF;
+
+	select count(*) into v_count from user_tab_columns
+	where lower(table_name) = 'im_projects' and lower(column_name) = 'bt_found_in_version_id';
+	IF v_count > 0 THEN
+		alter table im_timesheet_tasks drop column bt_found_in_version_id;
+	END IF;
+
+	select count(*) into v_count from user_tab_columns
+	where lower(table_name) = 'im_projects' and lower(column_name) = 'bt_fix_for_version_id';
+	IF v_count > 0 THEN
+		alter table im_timesheet_tasks drop column bt_fix_for_version_id;
+	END IF;
+
+	RETURN 0;
+END;$body$ language 'plpgsql';
+SELECT inline_0 ();
+DROP FUNCTION inline_0 ();
+
 
