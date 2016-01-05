@@ -20,7 +20,8 @@ BEGIN
 	select count(*) into v_count from user_tab_columns
 	where lower(table_name) = 'im_timesheet_tasks' and lower(column_name) = 'bt_bug_id';
 	IF v_count > 0 THEN
-		alter table im_timesheet_tasks drop column bt_bug_id;
+		alter table im_timesheet_tasks drop column bt_bug_id cascade;
+		-- NOTICE:  drop cascades to view im_timesheet_tasks_view
 	END IF;
 
 	RETURN 0;
@@ -114,19 +115,19 @@ BEGIN
 	select count(*) into v_count from user_tab_columns
 	where lower(table_name) = 'im_projects' and lower(column_name) = 'bt_project_id';
 	IF v_count > 0 THEN
-		alter table im_timesheet_tasks drop column bt_project_id;
+		alter table im_timesheet_tasks drop column bt_project_id cascade;
 	END IF;
 
 	select count(*) into v_count from user_tab_columns
 	where lower(table_name) = 'im_projects' and lower(column_name) = 'bt_component_id';
 	IF v_count > 0 THEN
-		alter table im_timesheet_tasks drop column bt_component_id;
+		alter table im_timesheet_tasks drop column bt_component_id cascade;
 	END IF;
 
 	select count(*) into v_count from user_tab_columns
 	where lower(table_name) = 'im_projects' and lower(column_name) = 'bt_found_in_version_id';
 	IF v_count > 0 THEN
-		alter table im_timesheet_tasks drop column bt_found_in_version_id;
+		alter table im_timesheet_tasks drop column bt_found_in_version_id cascade;
 	END IF;
 
 	select count(*) into v_count from user_tab_columns
