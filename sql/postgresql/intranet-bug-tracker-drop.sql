@@ -113,27 +113,27 @@ DECLARE
 	v_count		integer;
 BEGIN
 	select count(*) into v_count from user_tab_columns
-	where lower(table_name) = 'im_projects' and lower(column_name) = 'bt_project_id';
-	IF v_count > 0 THEN
-		alter table im_timesheet_tasks drop column bt_project_id cascade;
-	END IF;
-
-	select count(*) into v_count from user_tab_columns
-	where lower(table_name) = 'im_projects' and lower(column_name) = 'bt_component_id';
+	where lower(table_name) = 'im_timesheet_tasks' and lower(column_name) = 'bt_component_id';
 	IF v_count > 0 THEN
 		alter table im_timesheet_tasks drop column bt_component_id cascade;
 	END IF;
 
 	select count(*) into v_count from user_tab_columns
+	where lower(table_name) = 'im_projects' and lower(column_name) = 'bt_project_id';
+	IF v_count > 0 THEN
+		alter table im_projects drop column bt_project_id cascade;
+	END IF;
+
+	select count(*) into v_count from user_tab_columns
 	where lower(table_name) = 'im_projects' and lower(column_name) = 'bt_found_in_version_id';
 	IF v_count > 0 THEN
-		alter table im_timesheet_tasks drop column bt_found_in_version_id cascade;
+		alter table im_projects drop column bt_found_in_version_id cascade;
 	END IF;
 
 	select count(*) into v_count from user_tab_columns
 	where lower(table_name) = 'im_projects' and lower(column_name) = 'bt_fix_for_version_id';
 	IF v_count > 0 THEN
-		alter table im_timesheet_tasks drop column bt_fix_for_version_id;
+		alter table im_projects drop column bt_fix_for_version_id;
 	END IF;
 
 	RETURN 0;
