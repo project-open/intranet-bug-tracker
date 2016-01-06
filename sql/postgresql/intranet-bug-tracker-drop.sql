@@ -35,7 +35,7 @@ DROP FUNCTION inline_0 ();
 -- In order to delete the attribute, we need to 
 -- recreate dependent views:
 --
-drop view im_timesheet_tasks_view;
+drop view if exists im_timesheet_tasks_view;
 create or replace view im_timesheet_tasks_view as
 select  t.*,
         p.parent_id as project_id,
