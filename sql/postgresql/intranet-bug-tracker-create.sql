@@ -23,7 +23,7 @@
 -- 4300-4499    Intranet Bug-Tracker
 
 
--- Add a link from Timesheet Tasks to a BT-Bug:
+-- Add a link from Gantt tasks to a BT-Bug:
 --
 
 -- alter table im_timesheet_tasks drop column bt_bug_id;
