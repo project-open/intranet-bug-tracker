@@ -32,7 +32,7 @@ db_1row maint_project_info "
 "
 
 # Set some common bug-tracker variables
-set package_key [db_string package_key "select package_key from apm_packages where package_id = :package_id"]
+set package_key [db_string package_key "select package_key from apm_packages where package_id = :package_id" -default ""]
 set workflow_id [bug_tracker::bug::get_instance_workflow_id -package_id $package_id]
 set page_title "New [bug_tracker::conn Bug -package_id $package_id]"
 set context [list $page_title]
